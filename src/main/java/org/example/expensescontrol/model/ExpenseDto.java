@@ -1,7 +1,5 @@
 package org.example.expensescontrol.model;
 
-import lombok.With;
-
 import java.time.LocalDate;
 
 public record ExpenseDto(
