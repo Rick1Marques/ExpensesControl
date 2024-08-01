@@ -6,10 +6,10 @@ import org.example.expensescontrol.model.ExpenseDto;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 class ExpenseServiceTest {
@@ -43,7 +43,35 @@ class ExpenseServiceTest {
 
         Expense result = expenseService.addExpense(expenseDto);
 
+        verify(mockExpenseRepo).save();
+
         assertEquals(expense, result);
 
+    }
+
+    @Test
+    void removeExpense() {
+
+        String id = "1";
+
+        Expense expense = new Expense(
+                "1",
+                "food",
+                "liferando",
+                30.70,
+                false,
+                "",
+                LocalDate.of(2024,5,20)
+                );
+
+        when(mockExpenseRepo.findById(id)).thenReturn(Optional.of(expense));
+        doNothing().when(mockExpenseRepo).deleteById(id);
+
+        String result = expenseService.removeExpense("1");
+
+        verify(mockExpenseRepo).findById(id);
+        verify(mockExpenseRepo).deleteById(id);
+
+        assertEquals(id, result);
     }
 }
