@@ -52,7 +52,6 @@ class ExpenseServiceTest {
     @Test
     void removeExpense() throws Exception {
 
-        String id = "1";
 
         Expense expense = new Expense(
                 "1",
@@ -64,14 +63,38 @@ class ExpenseServiceTest {
                 LocalDate.of(2024,5,20)
                 );
 
-        when(mockExpenseRepo.findById(id)).thenReturn(Optional.of(expense));
-        doNothing().when(mockExpenseRepo).deleteById(id);
+        when(mockExpenseRepo.findById(expense.id())).thenReturn(Optional.of(expense));
+        doNothing().when(mockExpenseRepo).deleteById(expense.id());
 
         String result = expenseService.removeExpense("1");
 
-        verify(mockExpenseRepo).findById(id);
-        verify(mockExpenseRepo).deleteById(id);
+        verify(mockExpenseRepo).findById(expense.id());
+        verify(mockExpenseRepo).deleteById(expense.id());
 
-        assertEquals(id, result);
+        assertEquals(expense.id(), result);
+    }
+
+    @Test
+    void updateExpense(){
+
+        Expense expense = new Expense(
+                "1",
+                "food",
+                "liferando",
+                30.70,
+                false,
+                "",
+                LocalDate.of(2024,5,20)
+        );
+
+        when(mockExpenseRepo.findById(expense.id())).thenReturn(Optional.of(expense));
+        when(mockExpenseRepo.save(expense)).thenReturn(expense);
+
+        Expense result = expenseService.updateExpense(expense);
+
+        verify(mockExpenseRepo).findById(expense.id());
+        verify(mockExpenseRepo).save(expense);
+
+        assertEquals(expense, result);
     }
 }
