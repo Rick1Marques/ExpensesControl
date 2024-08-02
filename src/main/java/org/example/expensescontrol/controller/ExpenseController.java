@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.expensescontrol.model.Expense;
 import org.example.expensescontrol.model.ExpenseDto;
 import org.example.expensescontrol.service.ExpenseService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -17,7 +16,12 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @PostMapping
-    public Expense addExpense(@RequestBody ExpenseDto expenseDto){
+    public Expense postExpense(@RequestBody ExpenseDto expenseDto){
         return expenseService.addExpense(expenseDto);
+    }
+
+    @GetMapping
+    public List<Expense> getExpenses(){
+        return expenseService.getExpenses();
     }
 }

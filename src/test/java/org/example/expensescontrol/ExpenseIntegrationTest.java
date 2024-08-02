@@ -21,6 +21,15 @@ public class ExpenseIntegrationTest {
 
     @Test
     @DirtiesContext
+    void getExpenses() throws Exception{
+        mvc.perform(MockMvcRequestBuilders
+                .get("/api/expenses"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[]"));
+    }
+
+    @Test
+    @DirtiesContext
     void addExpense() throws Exception {
 
         mvc.perform(MockMvcRequestBuilders
@@ -51,9 +60,4 @@ public class ExpenseIntegrationTest {
                 .andExpect(jsonPath("$.id").exists());
     }
 
-    @Test
-    @DirtiesContext
-    void removeExpense() throws Exception{
-
-    }
 }
