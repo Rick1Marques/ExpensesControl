@@ -22,7 +22,7 @@ class ExpenseServiceTest {
 
         ExpenseDto expenseDto = new ExpenseDto(
                 "food",
-                "liferando",
+                "lieferando",
                 30.70,
                 false,
                 "",
@@ -32,7 +32,7 @@ class ExpenseServiceTest {
         Expense expense = new Expense(
                 null,
                 "food",
-                "liferando",
+                "lieferando",
                 30.70,
                 false,
                 "",
@@ -56,7 +56,7 @@ class ExpenseServiceTest {
         Expense expense = new Expense(
                 "1",
                 "food",
-                "liferando",
+                "lieferando",
                 30.70,
                 false,
                 "",
@@ -80,7 +80,7 @@ class ExpenseServiceTest {
         Expense expense = new Expense(
                 "1",
                 "food",
-                "liferando",
+                "lieferando",
                 30.70,
                 false,
                 "",
