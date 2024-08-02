@@ -6,11 +6,17 @@ import org.example.expensescontrol.model.Expense;
 import org.example.expensescontrol.model.ExpenseDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ExpenseService {
 
 private final ExpenseRepo expenseRepo;
+
+public List<Expense> getExpenses(){
+    return expenseRepo.findAll();
+}
 
 public Expense addExpense(ExpenseDto expenseDto){
 
