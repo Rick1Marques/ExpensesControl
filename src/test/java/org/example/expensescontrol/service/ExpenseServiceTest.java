@@ -6,6 +6,7 @@ import org.example.expensescontrol.model.ExpenseDto;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,41 @@ class ExpenseServiceTest {
 
     private final ExpenseRepo mockExpenseRepo = mock(ExpenseRepo.class);
     private final ExpenseService expenseService = new ExpenseService(mockExpenseRepo);
+
+
+    @Test
+    void getExpenses() {
+
+        Expense expense1 = new Expense(
+                "1",
+                "food",
+                "liferando",
+                30.70,
+                false,
+                "",
+                LocalDate.of(2024,5,20)
+        );
+
+        Expense expense2 = new Expense(
+                "2",
+                "food",
+                "liferando",
+                50.90,
+                false,
+                "",
+                LocalDate.of(2024,5,25)
+        );
+
+        List<Expense> expenseList = List.of(expense1, expense2);
+
+        when(mockExpenseRepo.findAll()).thenReturn(expenseList);
+
+        List<Expense> result = expenseService.getExpenses();
+
+        assertEquals(expenseList, result);
+
+    }
+
 
     @Test
     void addExpense() {

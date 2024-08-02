@@ -50,4 +50,10 @@ public class ExpenseIntegrationTest {
                         """))
                 .andExpect(jsonPath("$.id").exists());
     }
+
+    @Test
+    @DirtiesContext
+    void removeExpense() throws Exception{
+
+    }
 }
