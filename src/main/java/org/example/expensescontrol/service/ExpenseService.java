@@ -31,4 +31,17 @@ public String removeExpense(String id) throws Exception {
     return id;
 }
 
+public Expense updateExpense(Expense expense) throws Exception {
+    Expense oldExpense = expenseRepo.findById(expense.id()).orElseThrow(Exception::new);
+    Expense updatedExpense = oldExpense
+            .withCategory(expense.category())
+            .withSupplier(expense.supplier())
+            .withAmount(expense.amount())
+            .withCashPayment(expense.cashPayment())
+            .withDescription(expense.description())
+            .withDate(expense.date());
+
+    return expenseRepo.save(updatedExpense);
+}
+
 }

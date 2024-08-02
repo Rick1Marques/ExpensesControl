@@ -75,7 +75,7 @@ class ExpenseServiceTest {
     }
 
     @Test
-    void updateExpense(){
+    void updateExpense() throws Exception {
 
         Expense expense = new Expense(
                 "1",
