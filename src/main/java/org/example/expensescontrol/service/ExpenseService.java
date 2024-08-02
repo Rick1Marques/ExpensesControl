@@ -25,4 +25,10 @@ public Expense addExpense(ExpenseDto expenseDto){
     return expenseRepo.save(newExpense);
 }
 
+public String removeExpense(String id) throws Exception {
+    expenseRepo.findById(id).orElseThrow(Exception::new);
+    expenseRepo.deleteById(id);
+    return id;
+}
+
 }

@@ -43,14 +43,14 @@ class ExpenseServiceTest {
 
         Expense result = expenseService.addExpense(expenseDto);
 
-        verify(mockExpenseRepo).save();
+        verify(mockExpenseRepo).save(expense);
 
         assertEquals(expense, result);
 
     }
 
     @Test
-    void removeExpense() {
+    void removeExpense() throws Exception {
 
         String id = "1";
 
