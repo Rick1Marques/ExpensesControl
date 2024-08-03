@@ -2,6 +2,7 @@ package org.example.expensescontrol.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.expensescontrol.DB.ExpenseRepo;
+import org.example.expensescontrol.exception.ExpenseNotFoundException;
 import org.example.expensescontrol.model.Expense;
 import org.example.expensescontrol.model.ExpenseDto;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,14 @@ public Expense addExpense(ExpenseDto expenseDto){
     return expenseRepo.save(newExpense);
 }
 
-public String removeExpense(String id) throws Exception {
-    expenseRepo.findById(id).orElseThrow(Exception::new);
+public String removeExpense(String id) throws ExpenseNotFoundException {
+    expenseRepo.findById(id).orElseThrow(()-> new ExpenseNotFoundException(id));
     expenseRepo.deleteById(id);
     return id;
 }
 
-public Expense updateExpense(Expense expense) throws Exception {
-    Expense oldExpense = expenseRepo.findById(expense.id()).orElseThrow(Exception::new);
+public Expense updateExpense(Expense expense) throws ExpenseNotFoundException {
+    Expense oldExpense = expenseRepo.findById(expense.id()).orElseThrow(()-> new ExpenseNotFoundException(expense.id()));
     Expense updatedExpense = oldExpense
             .withCategory(expense.category())
             .withSupplier(expense.supplier())

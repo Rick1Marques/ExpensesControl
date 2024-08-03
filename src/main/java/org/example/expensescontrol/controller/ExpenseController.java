@@ -24,4 +24,9 @@ public class ExpenseController {
     public List<Expense> getExpenses(){
         return expenseService.getExpenses();
     }
+
+    @PutMapping
+    public Expense putExpense(@RequestBody Expense expense) {
+        return expenseService.updateExpense(expense);
+    }
 }
