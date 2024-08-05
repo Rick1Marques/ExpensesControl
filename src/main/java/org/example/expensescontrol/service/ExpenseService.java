@@ -7,10 +7,8 @@ import org.example.expensescontrol.model.Expense;
 import org.example.expensescontrol.model.ExpenseDto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service

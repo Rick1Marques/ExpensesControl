@@ -6,7 +6,6 @@ import org.example.expensescontrol.model.ExpenseDto;
 import org.example.expensescontrol.service.ExpenseService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
