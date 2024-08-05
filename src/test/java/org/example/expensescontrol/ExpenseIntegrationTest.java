@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
@@ -109,6 +110,25 @@ public class ExpenseIntegrationTest {
                                                 "date":"2024-05-20"
                                                 }
                         """));
+    }
+
+    @Test
+    @DirtiesContext
+    void deleteExpense() throws Exception {
+        Expense expense = new Expense(
+                "1",
+                "food",
+                "liferando",
+                30.70,
+                false,
+                "",
+                LocalDate.of(2024,5,20)
+        );
+        expenseRepo.save(expense);
+
+        mvc.perform(MockMvcRequestBuilders
+                .delete("/api/expenses/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }
