@@ -21,8 +21,14 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public List<Expense> getExpenses(){
-        return expenseService.getExpenses();
+    public List<Expense> getExpenses(
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "supplier", required = false) String supplier,
+            @RequestParam(value = "cashPayment", required = false) boolean cashPayment,
+            @RequestParam(value = "payDate", required = false) String payDate,
+            @RequestParam(value = "sort", defaultValue = "asc") String sort
+    ){
+        return expenseService.getExpenses(category, supplier, cashPayment, payDate, sort);
     }
 
     @PutMapping

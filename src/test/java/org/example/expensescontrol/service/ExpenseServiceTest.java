@@ -42,13 +42,26 @@ class ExpenseServiceTest {
                 LocalDate.of(2024,5,25)
         );
 
-        List<Expense> expenseList = List.of(expense1, expense2);
+        Expense expense3 = new Expense(
+                "3",
+                "entertainment",
+                "cinemax",
+                20.30,
+                false,
+                "cinema",
+                LocalDate.of(2024,7,15)
+        );
+
+        List<Expense> expenseList = List.of(expense1, expense2, expense3);
 
         when(mockExpenseRepo.findAll()).thenReturn(expenseList);
 
-        List<Expense> result = expenseService.getExpenses();
+        List<Expense> expenseListFilter = List.of(expense1, expense2);
 
-        assertEquals(expenseList, result);
+
+        List<Expense> result = expenseService.getExpenses("food", "", false, "", "");
+
+        assertEquals(expenseListFilter, result);
 
     }
 
